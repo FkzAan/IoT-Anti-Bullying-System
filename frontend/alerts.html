@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alert History — Sentry Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-container"></div>
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1>Alert History</h1>
+          <div class="sub">All detected incidents across the sentry network</div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <select id="filter-status">
+          <option value="">All statuses</option>
+          <option value="new">New</option>
+          <option value="investigating">Investigating</option>
+          <option value="resolved">Resolved</option>
+        </select>
+        <input type="date" id="filter-from" title="From date" />
+        <input type="date" id="filter-to"   title="To date" />
+        <button class="btn btn-ghost" id="filter-apply">Apply filters</button>
+        <button class="btn btn-ghost" id="filter-clear">Clear</button>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Device</th>
+              <th>Detection</th>
+              <th>Confidence</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="alerts-body">
+            <tr><td colspan="5" class="empty-state">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modal-backdrop" style="display:none;">
+    <div class="modal" id="modal-content"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/alerts.js"></script>
+</body>
+</html>
